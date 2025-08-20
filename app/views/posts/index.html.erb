@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina Inicial</title>
+    <%= stylesheet_link_tag "profile.css" %>
+</head>
+<body>
+    <div class="container mt-2">
+        <div class="row text-center">
+            <div class="col-sm-4 text-center">
+                <div>
+                    <%= image_tag "62911694.jpeg", class: "img-thumbnail col-md-6 profile-image"%>
+                </div>
+                    
+                <div>
+                    <h4>Matheus Jose</h4>
+                    <h6>Web Developer</h6>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut animi sed alias minus, architecto similique eligendi rem veritatis, accusamus totam at pariatur sequi, quo quas praesentium adipisci consequuntur asperiores? Voluptas?
+                    </p>
+                </div>
+            </div>
+            
+            <div class="col-sm-8">
+                <div class="row">
+                <% @posts.each do |p|%>
+                    <div class="col-md-5 m-1">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-title">
+                                    <h3><%= p.title%></h3>
+                                    
+                                </div>
+                                <hr>
+                                <div class="card-text">
+                                    <%= truncate(p.subtitle, length:100, omission:"...")%>
+                                </div>
+                                <hr>
+                                <div class="card-link">
+                                    <a href="/posts/<%= p.id%>" class="card-link btn btn-outline-light">abrir</a>
+                                </div>
+                        
+                            </div>
+                        </div>
+                        
+                    </div>
+                
+                <% end %>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+    
+
+
+
+
+
+    
+</body>
+</html>
+
+
+

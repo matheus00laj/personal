@@ -1,0 +1,28 @@
+<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
+<%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-4">
+      <%= form_with url: session_path do |form| %>
+        <div>
+          <%= form.label :email, class:"form-label"%>
+          <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Digite Seu Endereço de E-mail", value: params[:email_address], class: "form-control" %>
+        </div>
+        <div>
+          <%= form.label :Senha, class:"form-label"%>
+          <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Digite Sua Senha", maxlength: 72, class: "form-control" %><br>
+        </div>
+        <div>
+          <%= form.submit "Entrar" %>
+        </div>
+          
+        <% end %>
+
+      <div>
+        <%= link_to "Esqueceu a senha?", new_password_path %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
