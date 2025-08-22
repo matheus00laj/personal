@@ -10,23 +10,28 @@
 #   https://dev.mysql.com/doc/refman/5.7/en/password-hashing.html
 #
 default: &default
-  adapter: mysql2
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: 
-  password: 
-  socket: /var/run/mysqld/mysqld.sock
+  
 
 development:
   <<: *default
-  database: personal_blog_dev
+  adapter: mysql2
+  database: <%=ENV['DB_DEV_NAME']%>
+  username: <%=ENV['DB_DEV_USERNAME']%>
+  password: <%=ENV['DB_DEV_PASSWORD']%>
+  socket: <%=ENV['DB_DEV_SOCKET']%>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: personal_blog_test
+  adapter: mysql2
+  database: <%=ENV['DB_TEST_NAME']%>
+  username: <%=ENV['DB_TEST_USERNAME']%>
+  password: <%=ENV['DB_TEST_PASSWORD']%>
+  socket: <%=ENV['DB_TEST_SOCKET']%>
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -51,18 +56,23 @@ test:
 production:
   primary: &primary_production
     <<: *default
-    database: personal_blog_production
-    username: personal_blog
-    password: <%= ENV["PERSONAL_BLOG_DATABASE_PASSWORD"] %>
+    adapter: mysql2
+    database: <%=ENV['DB_PRODUCTION_NAME']%> 
+    username: <%=ENV['DB_PRODUCTION_USERNAME']%> 
+    password: <%=ENV['DB_PRODUCTION_PASSWORD']%> 
+    socket: <%=ENV['DB_PRODUCTION_SOCKET']%> 
   cache:
     <<: *primary_production
+    adapter: mysql2
     database: personal_blog_production_cache
     migrations_paths: db/cache_migrate
   queue:
     <<: *primary_production
+    adapter: mysql2
     database: personal_blog_production_queue
     migrations_paths: db/queue_migrate
   cable:
     <<: *primary_production
+    adapter: mysql2
     database: personal_blog_production_cable
     migrations_paths: db/cable_migrate
